@@ -1,0 +1,113 @@
+{%  extends "base.html" %}
+
+{% block title %}
+    Login Page
+{% endblock %}
+
+<style>
+        body {
+            background-color: #333;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .form-signin {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+        
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+        
+        .form-signin input[type="text"],
+        .form-signin input[type="password"] {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out,
+                        background-color .15s ease-in-out,
+                        border-color .15s ease-in-out,
+                        box-shadow .15s ease-in-out;
+        }
+        
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+        
+        .btn-secondary {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            color: #fff;
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+    </style>
+{% block content %}
+
+    <body>
+        <form method="POST" class="form-signin" style="color: white">
+    
+            <div class="container ">
+                {{ form.hidden_tag() }}     <!--To prevent attacks: Cross Site Request Forgery-->
+    
+                <h1 class="h3 font-weight-normal mt-5">
+                    Please Login
+                </h1>
+    
+                {{ form.username.label() }}
+                {{ form.username(class="form-control", placeholder="Username") }}
+    
+                {{ form.password.label() }}
+                {{ form.password(class="form-control", placeholder="Password") }}
+            
+                <br>
+    
+                <div>
+                    <h6>Don't have an account?</h6>
+                    <a class="btn btn-sm btn-secondary href={{ url_for('register') }}">Sign Up</a>
+                </div>
+                
+                {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+            
+            </div>
+    
+        </form>
+    </body>
+{% endblock %}
