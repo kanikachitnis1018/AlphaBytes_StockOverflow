@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <main>
+        <div class="big-wrapper light">
+            <img src="..\static\Images\lion-6620633_1920.png" alt="" class="shape" />
+
+            <header>
+                <div class="container">
+                    <div class="logo">
+                        <img src="..\static\Images\lion-6620633_1920.png" alt="Logo" />
+                        <h3>Stock Overflow</h3>
+                    </div>
+
+                    <div class="links">
+                        <ul>
+                            <li><a href="{{ url_for('livemarket') }}">Live Market</a></li>
+                            <li><a href="{{ url_for('analytics') }}">Analytics</a></li>
+                            <li><a href="{{ url_for('chatbot') }}">Chatbot</a></li>
+                            <li><a href="{{ url_for('register') }}" class="btn">Register</a></li>
+                            <li><a href="{{ url_for('login') }}" class="btn">Login</a></li>
+                
+                        </ul>
+                    </div>
+
+                    <div class="overlay"></div>
+
+                    <div class="hamburger-menu">
+                        <div class="bar"></div>
+                    </div>
+                </div>
+            </header>
+
+            {% block content %}
+            
+            {% endblock %}
+
+            <div class="bottom-area">
+                <div class="container">
+                    <button class="toggle-btn">
+                        <i class="far fa-moon"></i>
+                        <i class="far fa-sun"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% block javascript %}
+        <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+        <script src="{{ url_for('static', filename='js/app.js') }}">
+            var toggle_btn;
+            var big_wrapper;
+            var hamburger_menu;
+
+            function declare() {
+            toggle_btn = document.querySelector(".toggle-btn");
+            big_wrapper = document.querySelector(".big-wrapper");
+            hamburger_menu = document.querySelector(".hamburger-menu");
+            }
+
+            const main = document.querySelector("main");
+
+            declare();
+
+            let dark = false;
+
+            function toggleAnimation() {
+            // Clone the wrapper
+            dark = !dark;
+            let clone = big_wrapper.cloneNode(true);
+            if (dark) {
+                clone.classList.remove("light");
+                clone.classList.add("dark");
+            } else {
+                clone.classList.remove("dark");
+                clone.classList.add("light");
+            }
+            clone.classList.add("copy");
+            main.appendChild(clone);
+
+            document.body.classList.add("stop-scrolling");
+
+            clone.addEventListener("animationend", () => {
+                document.body.classList.remove("stop-scrolling");
+                big_wrapper.remove();
+                clone.classList.remove("copy");
+                // Reset Variables
+                declare();
+                events();
+            });
+            }
+
+            function events() {
+            toggle_btn.addEventListener("click", toggleAnimation);
+            hamburger_menu.addEventListener("click", () => {
+                big_wrapper.classList.toggle("active");
+            });
+            }
+
+            events();
+        </script>
+{% endblock %}
+</body>
+
+</html>
