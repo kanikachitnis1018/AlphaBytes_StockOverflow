@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, DateField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from models import User
 
@@ -24,3 +24,9 @@ class LoginForm(FlaskForm):
     username = StringField(label='Username', validators=[DataRequired()])
     password = PasswordField(label = 'Password', validators=[DataRequired()])
     submit = SubmitField(label='Sign in')
+
+class ArimaForm(FlaskForm):
+    stock_code = StringField(label='Stock Symbol', validators=[DataRequired()])
+    start_date = DateField(label='Start Date', validators=[DataRequired()])
+    end_date = DateField(label='End Date', validators=[DataRequired()])
+    predict = SubmitField(label= 'Predict')

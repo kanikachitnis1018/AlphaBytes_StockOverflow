@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db, bcrypt, login_manager
 from models import User
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm, ArimaForm
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -40,10 +40,13 @@ def register():
 def livemarket():
     return render_template('livemarket.html')
 
-@app.route("/chatbot", methods=['GET', 'POST'])
-def chatbot():
-    return render_template('chatbot.html')
-
 @app.route("/analytics", methods=['GET', 'POST'])
 def analytics():
-    return render_template('analytics.html')
+    form = ArimaForm()
+    if request.method == 'POST':
+        return redirect(url_for('dashboard'))
+    return render_template('analytics.html', form=form)
+
+@app.route("/dashboard", methods=['GET', 'POST'])
+def dashboard():
+    return render_template('dashboard.html')

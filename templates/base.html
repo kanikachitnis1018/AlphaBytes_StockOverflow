@@ -21,15 +21,15 @@
             <header>
                 <div class="container">
                     <div class="logo">
-                        <img src="..\static\Images\lion-6620633_1920.png" alt="Logo" />
-                        <h3>Stock Overflow</h3>
+                        <a href="{{ url_for('index') }}"><img src="..\static\Images\lion-6620633_1920.png" alt="Logo" /></a>
+                        <a href="{{ url_for('index') }}"><h3>Stock Overflow</h3></a>
                     </div>
 
                     <div class="links">
                         <ul>
                             <li><a href="{{ url_for('livemarket') }}">Live Market</a></li>
                             <li><a href="{{ url_for('analytics') }}">Analytics</a></li>
-                            <li><a href="{{ url_for('chatbot') }}">Chatbot</a></li>
+                            
                             <li><a href="{{ url_for('register') }}" class="btn">Register</a></li>
                             <li><a href="{{ url_for('login') }}" class="btn">Login</a></li>
                 
@@ -60,6 +60,7 @@
     </main>
 
 {% block javascript %}
+        
         <script src="https://kit.fontawesome.com/a81368914c.js"></script>
         <script src="{{ url_for('static', filename='js/app.js') }}">
             var toggle_btn;

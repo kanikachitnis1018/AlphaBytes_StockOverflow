@@ -4,13 +4,127 @@
     Analytics Page
 {% endblock %}
 
+    <style>
+        /* Analytics page specific styles */
+        body {
+          background-color: #333; /* Match the darker background from the image */
+        }
+      
+        .big-wrapper.light {
+          background-color: #444; /* Consistent dark background with lighter shade */
+          padding: 25px; /* Add padding for better spacing */
+          border-radius: 10px; /* Add rounded corners */
+        }
+      
+        .container {
+          display: flex;
+          justify-content: center; /* Center the content horizontally */
+          align-items: center; /* Center the content vertically */
+        }
+      
+        .form-signin {
+          width: 100%;
+          max-width: 330px;
+          background-color: #444; /* Consistent dark background */
+          color: #fff; /* Ensure text readability on dark background */
+        }
+      
+        .form-signin .form-control {
+          position: relative;
+          box-sizing: border-box;
+          height: 50px; /* Increased input height */
+          padding: 10px 15px; /* Adjusted padding for better spacing */
+          font-size: 16px;
+          border: none; /* Remove default border */
+          border-bottom: 2px solid #ddd; /* Add bottom border */
+          background-color: transparent; /* Transparent background */
+          color: #fff; /* White text for readability */
+          margin-bottom: 20px; /* Add space between input fields */
+        }
+      
+        .form-signin input[type="text"]::placeholder,
+        .form-signin input[type="password"]::placeholder {
+          color: #ccc; /* Placeholder color */
+        }
+      
+        .form-signin input[type="text"]:focus,
+        .form-signin input[type="password"]:focus {
+          outline: none; /* Remove default focus outline */
+          border-bottom-color: maroon; /* Change border color on focus */
+        }
+      
+        .form-signin label {
+          font-weight: bold; /* Make labels bold */
+          font-size: 18px; /* Increase label font size */
+          margin-bottom: 10px; /* Add space below labels */
+          display: block; /* Ensure labels are on their own line */
+        }
+      
+        /* Add styling for the submit button */
+        .btn {
+          display: inline-block;
+          font-weight: 400;
+          text-align: center;
+          white-space: nowrap;
+          vertical-align: middle;
+          cursor: pointer;
+          user-select: none;
+          border: none; /* Remove border */
+          padding: .375rem .75rem;
+          font-size: 1rem;
+          line-height: 1.5;
+          border-radius: .25rem;
+          transition: color .15s ease-in-out,
+                      background-color .15s ease-in-out,
+                      border-color .15s ease-in-out,
+                      box-shadow .15s ease-in-out;
+        }
+      
+        .btn-primary {
+          color: #fff;
+          background-color: maroon; /* Change button color */
+        }
+      
+        .btn-primary:hover {
+          background-color: darkred; /* Change hover color */
+        }
+      </style>
+
 {% block content %}
 <body>
+    
     <main>
         <div class="big-wrapper light">
+            <form method="POST" class="form-signin">
+
+                <div class="container">  {{ form.hidden_tag() }}
+                  <h1 class="h3 font-weight-normal mt-5">
+                    Enter Values
+                  </h1>
+          
+                  {{ form.stock_code.label() }}
+                  {{ form.stock_code(class="form-control", placeholder="Stock Symbol") }}
+          
+                  <br>
+
+                  {{ form.start_date.label() }}
+                  {{ form.start_date(class="form-control", placeholder="Start Date") }}
+                  
+                  <br>
+
+                  {{ form.end_date.label() }}
+                  {{ form.end_date(class="form-control", placeholder="End Date") }}
+          
+                  <br>
+          
+                  {{ form.predict(class="btn btn-lg btn-block btn-primary") }}
+                </div>
+          
+              </form>
             
         </div>
     </main>
+
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
