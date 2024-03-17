@@ -4,35 +4,31 @@
     Analytics Page
 {% endblock %}
 
+<style>
+    .arima-container {
+        padding-left:200px;
+    }
+</style>
+
 {% block content %}
 <body>
     
     <main>
         <div class="big-wrapper light">
-            <img src="Images\lion-6620633_1920.png" alt="" class="shape" />
 
             <div class="showcase-area">
-                <div class="container">
-                    <!-- TradingView Widget BEGIN -->
-                    <div class="tradingview-widget-container">
-                        <div class="tradingview-widget-container__widget"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-                                {
-                                    "autosize": true,
-                                    "symbol": "NASDAQ:TSLA",
-                                    "interval": "D",
-                                    "timezone": "Etc/UTC",
-                                    "theme": "dark",
-                                    "style": "1",
-                                    "locale": "en",
-                                    "enable_publishing": false,
-                                    "allow_symbol_change": true,
-                                    "calendar": false,
-                                    "support_host": "https://www.tradingview.com"
-                                }
-                            </script>
-                    </div>
-                    <!-- TradingView Widget END -->
+                <div class="arima-container">
+                    <h1>ARIMA Forecasted Values</h1>
+                    <ul>
+                        {% if forecast_list %}
+                            {% for day, value in forecast_list %}
+                                <li>{{ day }}: {{ value }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li>No forecasted values available.</li>
+                        {% endif %}
+                    </ul>
+                    
                 </div>
                 <div class="container">
                     <div class='tableauPlaceholder' id='viz1710614316222' style='position: relative'><noscript><a href='#'><img
@@ -57,15 +53,6 @@
                         </object></div>
                     <script
                         type='text/javascript'>                    var divElement = document.getElementById('viz1710614316222'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.width = '1000px'; vizElement.style.height = '827px'; } else if (divElement.offsetWidth > 500) { vizElement.style.width = '1000px'; vizElement.style.height = '827px'; } else { vizElement.style.width = '100%'; vizElement.style.height = '1527px'; } var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-                </div>
-            </div>
-
-            <div class="bottom-area">
-                <div class="container">
-                    <button class="toggle-btn">
-                        <i class="far fa-moon"></i>
-                        <i class="far fa-sun"></i>
-                    </button>
                 </div>
             </div>
         </div>

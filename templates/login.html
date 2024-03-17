@@ -4,94 +4,38 @@
   Login Page
 {% endblock %}
 
-<style>
-  /* Login page specific styles */
-  body {
-    background-color: #333; /* Match the darker background from the image */
-  }
-
-  .container {
-    display: flex;
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
-    height: 100vh;
-  }
-
-  .form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 25px; /* Increase padding for better spacing */
-    background-color: #333; /* Consistent dark background */
-    border-radius: 10px;
-    color: #fff; /* Ensure text readability on dark background */
-  }
-
-  .form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: 50px; /* Increased input height */
-    padding: 10px 15px; /* Adjusted padding for better spacing */
-    font-size: 16px;
-    border: none; /* Remove default border */
-    border-bottom: 2px solid #ddd; /* Add bottom border */
-    background-color: transparent; /* Transparent background */
-    color: #fff; /* White text for readability */
-    margin-bottom: 20px; /* Add space between input fields */
-  }
-
-  .form-signin input[type="text"]::placeholder,
-  .form-signin input[type="password"]::placeholder {
-    color: #ccc; /* Placeholder color */
-  }
-
-  .form-signin input[type="text"]:focus,
-  .form-signin input[type="password"]:focus {
-    outline: none; /* Remove default focus outline */
-    border-bottom-color: maroon; /* Change border color on focus */
-  }
-
-  .form-signin label {
-    font-weight: bold; /* Make labels bold */
-    font-size: 18px; /* Increase label font size */
-    margin-bottom: 10px; /* Add space below labels */
-    display: block; /* Ensure labels are on their own line */
-  }
-
-  /* Add styling for the submit button */
-  .btn {
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    user-select: none;
-    border: none; /* Remove border */
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out,
-                background-color .15s ease-in-out,
-                border-color .15s ease-in-out,
-                box-shadow .15s ease-in-out;
-  }
-
-  .btn-primary {
-    color: #fff;
-    background-color: maroon; /* Change button color */
-  }
-
-  .btn-primary:hover {
-    background-color: darkred; /* Change hover color */
-  }
-</style>
-
 {% block content %}
+  <style>
+    /* Add your CSS styles here */
+    .form-signin {
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
+    .form-signin .form-control {
+      position: relative;
+      box-sizing: border-box;
+      height: auto;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px; /* Rounded corners */
+    }
+    .form-signin .btn-primary {
+      margin-top: 10px;
+    }
+    /* Adjusting size of the "Sign Up" and "Sign In" buttons */
+    .btn-signup,
+    .btn-signin {
+      font-size: 14px; /* Adjust font size */
+      padding: 5px 10px; /* Adjust padding */
+    }
+    /* Add more styles as needed */
+  </style>
+
   <body>
     <form method="POST" class="form-signin">
-
-      <div class="container">  {{ form.hidden_tag() }}
+      <div class="container">
+        {{ form.hidden_tag() }}
         <h1 class="h3 font-weight-normal mt-5">
           Please Login
         </h1>
@@ -105,13 +49,11 @@
         <br>
 
         <div>
-          <h6>Don't have an account?</h6>
-          <a class="btn btn-sm btn-secondary href={{ url_for('register') }}">Sign Up</a>
+          <a href="{{ url_for('register') }}"><h6>Don't have an account?</h6></a>
         </div>
 
-        {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+        {{ form.submit(class="btn btn-lg btn-block btn-primary btn-signin") }} <!-- Apply btn-signin class -->
       </div>
-
     </form>
   </body>
 {% endblock %}

@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, url_for, request
-from app import app, db, bcrypt, login_manager
+from app import app, db, login_manager
 from models import User
 from forms import LoginForm, RegisterForm, ArimaForm
 import yfinance as yf
@@ -52,6 +52,10 @@ def register():
 def livemarket():
     return render_template('livemarket.html')
 
+from flask import jsonify
+
+from flask import jsonify
+
 @app.route("/analytics", methods=['GET', 'POST'])
 def analytics():
     form = ArimaForm()
@@ -69,14 +73,20 @@ def analytics():
         # Generating predictions using ARIMA
         arima_forecast = arima_model.forecast(steps=5)  # Forecasting next 5 days
         
-        # Convert forecast to a list and jsonify it
-        forecast_list = arima_forecast.tolist()
+        # Convert forecast to a list of tuples
+        forecast_list = [(f"Day {i+1}", value) for i, value in enumerate(arima_forecast.tolist())]
         
         return render_template('dashboard.html', forecast_list=forecast_list)
     
-    return render_template('analytics.html', form=form)    
+    return render_template('analytics.html', form=form)
 
 @app.route("/dashboard", methods=['GET', 'POST'])
 def dashboard():
     sarima_forecast = request.args.get('sarima_forecast')  # Retrieve forecasted values from query parameter
-    return render_template('dashboard.html', sarima_forecast=sarima_forecast)
+    if sarima_forecast:
+        forecast_values = [float(val) for val in sarima_forecast.split(',')]
+        forecast_list = [(f"Day {i+1}", val) for i, val in enumerate(forecast_values)]
+    else:
+        forecast_list = None
+    return render_template('dashboard.html', forecast_list=forecast_list)
+
