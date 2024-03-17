@@ -1,0 +1,124 @@
+{%  extends "base.html" %}
+
+<style>
+    body {
+        background-color: #444; /* Match the darker background from the image */
+      }
+      
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      
+      .form-register {
+        width: 100%;
+        max-width: 330px;
+        padding: 25px; /* Increase padding for better spacing */
+        background-color: #444; /* Consistent dark background */
+        border-radius: 10px;
+        color: #fff; /* Ensure text readability on dark background */
+      }
+      
+      .form-register .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: 50px; /* Increased input height */
+        padding: 10px 15px; /* Adjusted padding for better spacing */
+        font-size: 16px;
+        border: none; /* Remove default border */
+        border-bottom: 2px solid #ddd; /* Add bottom border */
+        background-color: transparent; /* Transparent background */
+        color: #fff; /* White text for readability */
+        margin-bottom: 20px; /* Add space between input fields */
+      }
+      
+      .form-register input[type="text"]::placeholder,
+      .form-register input[type="email"]::placeholder,
+      .form-register input[type="password"]::placeholder {
+        color: #ccc; /* Placeholder color */
+      }
+      
+      .form-register input[type="text"]:focus,
+      .form-register input[type="email"]:focus,
+      .form-register input[type="password"]:focus {
+        outline: none; /* Remove default focus outline */
+        border-bottom-color: maroon; /* Change border color on focus */
+      }
+      
+      .form-register label {
+        font-weight: bold; /* Make labels bold */
+        font-size: 18px; /* Increase label font size */
+        margin-bottom: 10px; /* Add space below labels */
+        display: block; /* Ensure labels are on their own line */
+      }
+      
+      /* Add styling for the submit button */
+      .btn {
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        user-select: none;
+        border: none; /* Remove border */
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: .25rem;
+        transition: color .15s ease-in-out,
+                      background-color .15s ease-in-out,
+                      border-color .15s ease-in-out,
+                      box-shadow .15s ease-in-out;
+      }
+      
+      .btn-primary {
+        color: #fff;
+        background-color: maroon; /* Change button color */
+      }
+      
+      .btn-primary:hover {
+        background-color: darkred; /* Change hover color */
+      }
+      
+</style>
+
+{% block title %}
+    Register Page
+{% endblock %}
+
+{% block content %}
+<form method="POST" class="form-register">
+
+    <div class="container">
+        {{ form.hidden_tag() }}
+        <h1 class="h3 font-weight-normal mt-5">
+            Please Create an Account
+        </h1>
+
+        <label for="username">Username:</label>
+        {{ form.username(class="form-control", placeholder="Username") }}
+
+        <label for="email">Email Address:</label>
+        {{ form.email(class="form-control", placeholder="Email Address") }}
+
+        <label for="password1">Password:</label>
+        {{ form.password1(class="form-control", placeholder="Password") }}
+
+        <label for="password2">Confirm Password:</label>
+        {{ form.password2(class="form-control", placeholder="Confirm Password") }}
+
+        <br>
+        <div>
+            <h6>Already have an account?</h6>
+            <a class="btn btn-sm btn-secondary" href="{{ url_for('login') }}">Login</a>
+        </div>
+        {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+
+    </div>
+
+</form>
+
+{% endblock %}

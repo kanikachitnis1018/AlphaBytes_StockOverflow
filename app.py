@@ -1,9 +1,17 @@
-from stocks import app, db
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
-# Create the database tables
-with app.app_context():
-    db.create_all()
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SECRET_KEY'] = 'your_secret_key_here'
 
-# Run the Flask app
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
+
+from routes import *
+
 if __name__ == '__main__':
     app.run(debug=True)
